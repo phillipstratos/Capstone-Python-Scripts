@@ -1,6 +1,7 @@
 #from picamera import PiCamera
 from PIL import Image
 from time import sleep
+import matplotlib.pyplot as plt
 ##import numpy as np
 ##import argparse
 ##import cv2
@@ -53,12 +54,12 @@ for i in range(1):
 
     #Open image in reading mode and capture it to an object
     #img = Image.open('C:/Users/Stratos/Desktop/spring.jpg', 'r')
-    img = Image.open('C:/Users/Stratos/Desktop/shot.png', 'r')
+    img = Image.open('C:/Users/Stratos/Desktop/spring.jpg', 'r')
     
     
     #Reduce image resolution for faster processing
     #img.thumbnail((80, 60))  
-    #img.save('C:/Users/Stratos/Desktop/spring.jpg') 
+    #img.save('C:/Users/Stratos/Desktop/shot.png') 
     
     
     #Displays image
@@ -135,11 +136,18 @@ for i in range(1):
                         mean_x = acc_x / acc_count
                         mean_y = acc_y / acc_count
                         print("The mean x and y positions are", mean_x, "and",mean_y)
-
-                        #Draw a small cross in red at the mean position
-                        #img[mean_x + 0, mean_y - 1] = 255, 0, 0
-                        #img[mean_x - 1, mean_y + 0] = 255, 0, 0
-                        #img[mean_x + 0, mean_y + 0] = 255, 0, 0
-                        #img[mean_x + 1, mean_y + 0] = 255, 0, 0
-                        #img[mean_x + 0, mean_y + 1] = 255, 0, 0
                         
+                        #Marks the coordinates of each Predominantly Blue Pixel on the image
+                        plt.imshow(img)
+                        #Marks the image with an X
+                        plt.scatter(mean_x, mean_y, s=250, c='red', marker='x')
+                        plt.show()
+                        
+    #Marks the mean position on the image
+    plt.imshow(img)
+    #Marks image with an arrow pointing out the diode
+    plt.annotate('Diode', xy=(mean_x, mean_y), xycoords='data',
+    xytext=(0.5, 0.5), textcoords='figure fraction',
+    arrowprops=dict(arrowstyle="->"))
+    plt.show()
+    print("The diode is at the coordinates:","(", mean_x, ",",mean_y,")") 
