@@ -54,7 +54,7 @@ for i in range(1):
 
     #Open image in reading mode and capture it to an object
     #img = Image.open('C:/Users/Stratos/Desktop/spring.jpg', 'r')
-    img = Image.open('C:/Users/Stratos/Desktop/spring.jpg', 'r')
+    img = Image.open('C:/Users/Stratos/Desktop/spring3.jpg', 'r')
     
     
     #Reduce image resolution for faster processing
@@ -150,4 +150,12 @@ for i in range(1):
     xytext=(0.5, 0.5), textcoords='figure fraction',
     arrowprops=dict(arrowstyle="->"))
     plt.show()
-    print("The diode is at the coordinates:","(", mean_x, ",",mean_y,")") 
+    print("The diode is at the coordinates:","(", mean_x, ",",mean_y,")")   
+                        
+    #Commands for 80 by 40 pixel images
+    if mean_x > 41:
+        print("Turn Left!")
+    elif mean_x < 39:
+        print("Turn Right!")
+    else:
+        print("Go Straight!")
